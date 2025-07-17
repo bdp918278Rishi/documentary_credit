@@ -14,3 +14,6 @@ dependencies = [
     "annotated-types",
     "pillow"
 ]
+
+[project.scripts]
+run-test = "documentary_credit_tool.test:main"
