@@ -1,7 +1,7 @@
 # src/documentary_credit_tool/test.py
 
 from mcp.server.fastmcp import FastMCP
-from tool import UserParameters, ToolParameters, run_tool
+from .tool import UserParameters, ToolParameters, run_tool
 import json
 import argparse
 import sys
