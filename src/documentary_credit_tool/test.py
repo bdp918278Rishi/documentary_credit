@@ -23,45 +23,8 @@ def run_document_check(
 
 # Main entrypoint
 def main():
-    if "--mcp-stdio" in sys.argv:
-        # MCP stdio transport (used in production)
         mcp.run(transport="stdio")
-    elif "--user-params" in sys.argv and "--tool-params" in sys.argv:
-        # CLI testing mode
-        parser = argparse.ArgumentParser(description="Run the Documentary Credit Validation Tool")
-        parser.add_argument("--user-params", required=True, help="JSON string of UserParameters")
-        parser.add_argument("--tool-params", required=True, help="JSON string of ToolParameters")
-
-        args = parser.parse_args()
-
-        try:
-            user_dict = json.loads(args.user_params)
-            tool_dict = json.loads(args.tool_params)
-        except json.JSONDecodeError as e:
-            print(f"❌ Invalid JSON input: {e}")
-            sys.exit(1)
-
-        try:
-            config = UserParameters(**user_dict)
-            params = ToolParameters(**tool_dict)
-        except Exception as e:
-            print(f"❌ Error initializing parameters: {e}")
-            sys.exit(1)
-
-        output = run_tool(config, params)
-        print("✅ Output:")
-        print(json.dumps(output, indent=2))
-    else:
-        # Show usage help
-        print("\n❌ Missing required arguments.\n")
-        print("📘 Usage:")
-        print("  - MCP Mode:")
-        print("      documentary_credit_tool --mcp-stdio")
-        print("  - CLI Mode:")
-        print("      documentary_credit_tool \\")
-        print("         --user-params '{\"param1\": \"value\"}' \\")
-        print("         --tool-params '{\"lc_pdf_path\": \"path/to/lc.pdf\", \"swift_pdf_path\": \"path/to/swift.pdf\"}'\n")
-        sys.exit(1)
+    
 
 if __name__ == "__main__":
     main()
