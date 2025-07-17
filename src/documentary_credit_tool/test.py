@@ -1,8 +1,11 @@
-# === MCP Protocol Additions ===
+# src/documentary_credit_tool/test.py
+
 from mcp.server.fastmcp import FastMCP
 from tool import UserParameters, ToolParameters, run_tool
 import json
 import argparse
+import sys
+
 mcp = FastMCP(name="DocumentaryCreditValidator")
 
 @mcp.tool(name="run_document_check", description="Runs the LC document validation tool")
@@ -18,13 +21,10 @@ def run_document_check(
     result = run_tool(config, params)
     return result
 
-
-if __name__ == "__main__":
-    import sys
+def main():
     if "--mcp-stdio" in sys.argv:
         mcp.run(transport="stdio")
     else:
-        # Original CLI mode
         parser = argparse.ArgumentParser()
         parser.add_argument("--user-params", required=True)
         parser.add_argument("--tool-params", required=True)
@@ -37,4 +37,4 @@ if __name__ == "__main__":
         params = ToolParameters(**tool_dict)
 
         output = run_tool(config, params)
-        # print(OUTPUT_KEY, output)
+        print(json.dumps(output, indent=2))

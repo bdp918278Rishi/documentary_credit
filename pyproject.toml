@@ -16,4 +16,4 @@ dependencies = [
 ]
 
 [project.scripts]
-run-test = "documentary_credit_tool.test:main"
+documentary_credit_tool = "documentary_credit_tool.test:main"
