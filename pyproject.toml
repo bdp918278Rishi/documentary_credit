@@ -1,0 +1,16 @@
+[project]
+name = "documentary-credit"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "mcp>=1.6.0",
+    "pydantic",
+    "openai",
+    "PyMuPDF",
+    "pandas",
+    "openpyxl",
+    "annotated-types",
+    "pillow"
+]
