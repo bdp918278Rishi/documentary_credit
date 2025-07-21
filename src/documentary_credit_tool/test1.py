@@ -7,7 +7,7 @@ from mcp.server.fastmcp import FastMCP
 mcp = FastMCP(name="DocumentaryCreditValidator")
 
 # Register tool with MCP
-@mcp.tool(name="Documentary Credit Discrepancy Tool", description="Runs the LC document validation tool")
+@mcp.tool(name="Documentary_Credit_Discrepancy_Tool", description="Runs the LC document validation tool")
 def documentary_credit_check_tool(
     lc_pdf_path: str,
     swift_pdf_path: str,
