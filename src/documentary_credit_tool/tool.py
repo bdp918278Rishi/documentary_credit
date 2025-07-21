@@ -783,20 +783,3 @@ def run_tool(config: UserParameters, args: ToolParameters) -> Any:
         
     }
 
-
-OUTPUT_KEY = "tool_output"
-
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--user-params", required=True)
-    parser.add_argument("--tool-params", required=True)
-    args = parser.parse_args()
-
-    user_dict = json.loads(args.user_params)
-    tool_dict = json.loads(args.tool_params)
-
-    config = UserParameters(**user_dict)
-    params = ToolParameters(**tool_dict)
-
-    output = run_tool(config, params)
-    print(OUTPUT_KEY, output)

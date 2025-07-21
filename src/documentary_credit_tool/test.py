@@ -2,24 +2,29 @@ import sys
 import json
 import argparse
 from mcp.server.fastmcp import FastMCP
-from .tool import UserParameters, ToolParameters, run_tool
 
 # Initialize MCP
 mcp = FastMCP(name="DocumentaryCreditValidator")
 
 # Register tool with MCP
-@mcp.tool(name="run_document_check", description="Runs the LC document validation tool")
-def run_document_check(
+@mcp.tool(name="Documentary Credit Discrepancy Tool", description="Runs the LC document validation tool")
+def documentary_credit_check_tool(
     lc_pdf_path: str,
     swift_pdf_path: str,
 ) -> dict:
+    
     """
-    Entry point for MCP tool. Validates LC documents against SWIFT clauses.
+    Documentary credit check tool which will Validates LC documents against SWIFT clauses.
     """
+    from .tool import UserParameters, ToolParameters, run_tool
+
     config = UserParameters()
     params = ToolParameters(lc_pdf_path=lc_pdf_path, swift_pdf_path=swift_pdf_path)
     result = run_tool(config, params)
-    return result
+    extracted_path = result.get("extracted_text_folder_path")
+    discrepancy_path = result.get("discrepancy_individual_folder_path")
+    missing_docs = result.get("missing_document")
+    return extracted_path, discrepancy_path, missing_docs
 
 # Main entrypoint
 def main():
